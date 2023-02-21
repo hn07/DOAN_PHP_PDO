@@ -9,11 +9,18 @@ class Database extends PDO
         $pass = '';
         parent::__construct($connect, $user, $pass);
     }
-    public function select()
+    public function select($sql,$data = array(),$fetchStyle = PDO::FETCH_ASSOC) 
     {
-        $sql = "SELECT * FROM tbl_category ";
         $statement = $this->prepare($sql);
+
+        $sql = "SELECT * FROM $sql ";
+        foreach ($data as $key => $value) {
+            $statement->bindParam($key,$value);      
+        }     
+
         $statement->execute();
         return $statement->fetchAll(); 
+
+       
     }
 }
