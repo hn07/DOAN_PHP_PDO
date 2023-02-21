@@ -42,7 +42,7 @@
             } else {
                 include_once('app/controler/index.php');
                 $ctrl = new index(); 
-                $ctrl->home();
+                $ctrl->category();
             }
 
 
