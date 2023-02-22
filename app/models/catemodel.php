@@ -20,4 +20,9 @@ class catemodel extends Dmodel
     $data = array('id' => $id);
     return $this->db->select($sql, $data);
   }
+
+  public  function insert_category($tbl_category, $data)
+  {
+    return $this->db->insert($tbl_category, $data);
+  }
 }
