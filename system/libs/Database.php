@@ -13,7 +13,6 @@ class Database extends PDO
     {
         $statement = $this->prepare($sql);
 
-        $sql = "SELECT * FROM $sql ";
         foreach ($data as $key => $value) {
             $statement->bindParam($key, $value);
         }
@@ -29,8 +28,31 @@ class Database extends PDO
         $statement = $this->prepare($sql);
 
         foreach ($data as $key => $value) {
-            $statement->bindParam(":$key", $value);
+            $statement->bindValue(":$key", $value);
         }
         return $statement->execute();
+    }
+
+    public function update($table, $data, $cond)
+    {   //quyet tung cot trong db
+        $updatekeys = NULL;
+        foreach ($data as $key => $value) {
+            $updatekeys .="$key=:$key";
+        }
+        //cat dau , ở cuối hàng
+        $updatekeys = rtrim($updatekeys,",");
+
+        $sql = "UPDATE $table SET $updatekeys WHERE $cond";
+        $statement = $this->prepare($sql);
+
+        foreach ($data as $key => $value) {
+            $statement->bindValue(":$key", $value);
+        }
+        return $statement->execute();
+    }
+
+    public function delete($table,$cond,$limit = 1){
+        $sql = "DELETE FROM $table  WHERE $cond LIMIT $limit";
+        return $this->exec($sql);
     }
 }
