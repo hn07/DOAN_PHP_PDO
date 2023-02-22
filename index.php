@@ -40,7 +40,7 @@
                     }
                 }
             } else {
-                include_once('app/controler/index.php');
+                include_once('app/controllers/index.php');
                 $ctrl = new index(); 
                 $ctrl->homepage();
             }

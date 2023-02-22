@@ -1,9 +1,9 @@
 <?php
 class Database extends PDO
 {
-
+    
     public function __construct()
-    {
+    {   
         $connect = 'mysql:dbname=pdo_website;host=localhost;charset=utf8';
         $user = 'root';
         $pass = '';
@@ -12,14 +12,14 @@ class Database extends PDO
     public function select($sql, $data = array(), $fetchStyle = PDO::FETCH_ASSOC)
     {
         $statement = $this->prepare($sql);
-
+        
         foreach ($data as $key => $value) {
             $statement->bindParam($key, $value);
-        }
-
+    }
+  
         $statement->execute();
         return $statement->fetchAll();
-    }
+}
     public function insert($table, $data)
     {
         $key = implode(",", array_keys($data));
