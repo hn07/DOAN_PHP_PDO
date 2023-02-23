@@ -1,16 +1,29 @@
 <?php
-class index extends Dcontroller{
-    
+class index extends Dcontroller
+{
+
     public function __construct()
-    {   $data = array();
+    {
+        $data = array();
         parent::__construct();
     }
-   public function home(){
-   $this->load->view('header');
-   $homemodel =  $this->load->models('homemodel');
-   $data['category'] = $homemodel->category();
-   $this->load->view('home', $data);   
-   $this->load->view('footer');
-   }
+
+
+    // tra ve trang home 
+    public function index(){
+        $this->homepage();
+    }
+
+    public function homepage()
+    {
+        $this->load->view('header');
+        $this->load->view('home');
+        $this->load->view('footer');
+    }
+    public function notfound()
+    {
+        $this->load->view('header');
+        $this->load->view('404');
+        $this->load->view('footer');
+    }
 }
-?>

@@ -13,12 +13,12 @@
         
     </header>
     <main><?php
-            include_once('system/libs/Main.php');
-            include_once('system/libs/Dcontroller.php');
-            include_once('system/libs/Load.php');
-            include_once('system/libs/Database.php');
-            include_once('system/libs/Dmodel.php');
-
+            spl_autoload_register(function($class){
+                include_once('system/libs/'.$class.'.php');
+            });
+            
+            include_once('app/config/config.php');
+            
             $url = (isset($_GET['url']) ? $_GET['url'] : NULL);
             if ($url !== NULL) {
                 $url = rtrim($url, '/');
@@ -40,9 +40,9 @@
                     }
                 }
             } else {
-                include_once('app/controler/index.php');
+                include_once('app/controllers/index.php');
                 $ctrl = new index(); 
-                $ctrl->home();
+                $ctrl->homepage();
             }
 
 
