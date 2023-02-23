@@ -3,7 +3,7 @@
         if(isset($msg)){
             echo "<h1>".$msg."</h1>";
         }
-        ?>
+    ?>
     <table>
         <tr>
             <td>TITEL</td>

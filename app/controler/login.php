@@ -4,6 +4,7 @@ class login extends Dcontroller
 
     public function __construct()
     {
+        $message = array();
         $data = array();
         parent::__construct();
     }
@@ -20,10 +21,25 @@ class login extends Dcontroller
         $this->load->view('cpandel/login');
         $this->load->view('footer');
     }
+
+    public function dashboard(){
+        echo '<h1>This is Dashboard page</h1>';
+    }
     
     public function authentication_User(){
-        echo $userName = $_POST['username'];
-        echo $password = md5($_POST['password']);
+        $userName = $_POST['username'];
+        $password = md5($_POST['password']);
+        $table_admin = 'tbl_admin';
+        $loginmodel = $this->load->models('loginmodel');
+
+        $cont = $loginmodel->login($table_admin, $userName, $password);
+        if($cont == 0 ){
+            // echo $message['msg'] = 'User or password incorrect';
+            header('Location:'.BASE_URL.'login');
+            
+        }else{
+            header('Location:'.BASE_URL.'login/dashboard');
+        }
     }
     
 }

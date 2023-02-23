@@ -55,4 +55,13 @@ class Database extends PDO
         $sql = "DELETE FROM $table  WHERE $cond LIMIT $limit";
         return $this->exec($sql);
     }
+
+    // ham chuyen so sanh du lieu trong csdl
+    public function affectedRows($sql, $userName, $password){
+        $statement = $this->prepare($sql);
+        // điền username và pass
+        $statement->execute(array($userName, $password));
+        // đã điền vào và so sánh đúng trong csdl thì trả về 1 nếu sai trả về 0
+        return $statement->rowCount();
+    }
 }
