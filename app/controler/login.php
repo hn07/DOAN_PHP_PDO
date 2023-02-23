@@ -17,9 +17,13 @@ class login extends Dcontroller
     public function login()
     {
         $this->load->view('header');
-        $this->load->view('cpanel/login');
+        $this->load->view('cpandel/login');
         $this->load->view('footer');
     }
     
+    public function authentication_User(){
+        echo $userName = $_POST['username'];
+        echo $password = md5($_POST['password']);
+    }
     
 }
