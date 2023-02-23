@@ -59,7 +59,7 @@ class category extends Dcontroller
         $catemodel =  $this->load->models('catemodel');
         $tbl_category = 'tbl_category';
         // $title = $_POST['title'];
-        $id = 27;
+        $id = 8;
         $cond = "tbl_category.catid='$id'";
         $data = array(
             'catName' => 'Laptop'
@@ -76,7 +76,7 @@ class category extends Dcontroller
         $catemodel =  $this->load->models('catemodel');
         $tbl_category = 'tbl_category';
         // $title = $_POST['title'];
-        $id = 8;
+        $id = 28;
         $cond = "catid='$id'";
         $data = array(
             'catName' => 'Laptop'
