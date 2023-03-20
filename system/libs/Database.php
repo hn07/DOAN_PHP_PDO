@@ -1,9 +1,9 @@
 <?php
 class Database extends PDO
 {
-    
+
     public function __construct()
-    {   
+    {
         $connect = 'mysql:dbname=pdo_website;host=localhost;charset=utf8';
         $user = 'root';
         $pass = '';
@@ -12,14 +12,14 @@ class Database extends PDO
     public function select($sql, $data = array(), $fetchStyle = PDO::FETCH_ASSOC)
     {
         $statement = $this->prepare($sql);
-        
+
         foreach ($data as $key => $value) {
             $statement->bindParam($key, $value);
-    }
-  
+        }
+
         $statement->execute();
         return $statement->fetchAll();
-}
+    }
     public function insert($table, $data)
     {
         $key = implode(",", array_keys($data));
@@ -37,10 +37,10 @@ class Database extends PDO
     {   //quyet tung cot trong db
         $updatekeys = NULL;
         foreach ($data as $key => $value) {
-            $updatekeys .="$key=:$key";
+            $updatekeys .= "$key=:$key";
         }
         //cat dau , ở cuối hàng
-        $updatekeys = rtrim($updatekeys,",");
+        $updatekeys = rtrim($updatekeys, ",");
 
         $sql = "UPDATE $table SET $updatekeys WHERE $cond";
         $statement = $this->prepare($sql);
@@ -51,17 +51,28 @@ class Database extends PDO
         return $statement->execute();
     }
 
-    public function delete($table,$cond,$limit = 1){
+    public function delete($table, $cond, $limit = 1)
+    {
         $sql = "DELETE FROM $table  WHERE $cond LIMIT $limit";
         return $this->exec($sql);
     }
 
     // ham chuyen so sanh du lieu trong csdl
-    public function affectedRows($sql, $userName, $password){
+    public function affectedRows($sql, $userName, $password)
+    {
         $statement = $this->prepare($sql);
         // điền username và pass
         $statement->execute(array($userName, $password));
         // đã điền vào và so sánh đúng trong csdl thì trả về 1 nếu sai trả về 0
         return $statement->rowCount();
+    }
+
+
+    public function selectUser($sql, $userName, $password)
+    {
+        $statement = $this->prepare($sql);
+        // điền username và pass
+        $statement->execute(array($userName, $password));
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 }

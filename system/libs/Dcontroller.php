@@ -1,4 +1,4 @@
-<!-- GOi MOI THU CO TRON CONTROLLER -->
+<!-- GOi MOI THU CO TRONG CONTROLLER -->
 <?php
 class Dcontroller{
     protected $load = array();

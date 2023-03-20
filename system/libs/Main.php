@@ -51,6 +51,7 @@ class Main
     public function callMethod(){
         if (isset($this->url[2])) {
             $this->methodName = $this->url[1];
+            //method_exists kiểm tra xem phương thức Phương thức_name có tồn tại trong đối tượng object đã cho hay không.
             if(method_exists($this->controller,$this->methodName)){
                 $this->controller->{$this->methodName}($this->url[2]);
             }else{

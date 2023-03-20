@@ -12,7 +12,8 @@
     <header>
         
     </header>
-    <main><?php
+    <main>
+        <?php
             spl_autoload_register(function($class){
                 include_once('system/libs/'.$class.'.php');
             });
@@ -21,8 +22,7 @@
             
             $main = new Main();
             
-
-            ?>
+        ?>
     </main>
     <footer>
         

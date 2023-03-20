@@ -23,23 +23,39 @@ class login extends Dcontroller
     }
 
     public function dashboard(){
-        echo '<h1>This is Dashboard page</h1>';
+        Session::checkSession();
+        $this->load->view('cpandel/dashboard');
     }
     
     public function authentication_User(){
         $userName = $_POST['username'];
         $password = md5($_POST['password']);
+
         $table_admin = 'tbl_admin';
         $loginmodel = $this->load->models('loginmodel');
 
         $cont = $loginmodel->login($table_admin, $userName, $password);
         if($cont == 0 ){
-            // echo $message['msg'] = 'User or password incorrect';
+            echo $message['msg'] = 'User or password incorrect';
             header('Location:'.BASE_URL.'login');
             
-        }else{
+        }else{ 
+            $result = $loginmodel->getLogin($table_admin, $userName, $password);
+            Session::init();
+            Session::set('login',true);
+            Session::set('username',$result[0]['username']);
+            Session::set('admin_id',$result[0]['admin_id']);
+
             header('Location:'.BASE_URL.'login/dashboard');
+      
         }
+    }
+    public function logout() {
+        Session::init();
+        Session::destroy();
+        header('Location:'.BASE_URL.'login');
+
+
     }
     
 }

@@ -1,0 +1,1 @@
+<h1>wellcome to here <a href="<?php echo BASE_URL?>/login/logout">DANG XUAT</a></h1>
